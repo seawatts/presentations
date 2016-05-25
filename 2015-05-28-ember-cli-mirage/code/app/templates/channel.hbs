@@ -1,0 +1,23 @@
+<div class="row">
+  {{#each model.messages as |message|}}
+    <div class="row message">
+      <div class="col-md-2 user">
+        {{message.user}}
+      </div>
+      <div class="col-md-8 content">
+        {{message.content}}
+      </div>
+      <div class="col-md-2 date">
+        {{ago message.date}}
+      </div>
+    </div>
+  {{/each}}
+</div>
+<br/>
+<hr/>
+<div class="row">
+  <div class="pull-right">
+    {{input type="text" class='message-input' value=messageToAdd}}
+    <button class="btn btn-default" type="submit" {{action 'sendMessage'}}>Send</button>
+  </div>
+</div>
