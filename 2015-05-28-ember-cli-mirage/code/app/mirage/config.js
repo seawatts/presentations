@@ -1,7 +1,12 @@
 export default function() {
-  this.get('users');
-  this.post('users');
+  this.namespace = 'api';
+  this.get('/channels');
 
-  this.get('content');
-  this.post('content');
+  this.get('/messages/:id');
+  this.post('/messages');
+
+  this.get('/channels/:id');
+  this.put('/channels/:id', function() {
+    return {};
+  });
 }
