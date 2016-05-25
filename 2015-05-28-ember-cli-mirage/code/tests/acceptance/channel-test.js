@@ -15,58 +15,31 @@ module('Acceptance | channel', {
   }
 });
 
-test('it displays messages', function(assert) {
+test('when send a message it gets displayed on the page', function(assert) {
   assert.expect(1);
-  server.create('channels', {
-    messages: [1, 2, 3]
-  });
-  server.createList('messages', 3);
-  visit('/channels/1');
 
-  andThen(function() {
-    let messages = find('.message');
-    assert.equal(messages.length, 3, 'messages are displayed');
-  });
-});
-
-test('sending a message adds it to the list', function(assert) {
-  assert.expect(3);
+  server.get('/channels');
   server.create('channels', {
     messages: []
   });
+
   visit('/channels/1');
 
   andThen(function() {
-    var messages = find('.message');
-    assert.equal(messages.length, 0, 'messages are displayed');
-
     fillIn('.message-input', 'foo');
-    click('button');
-    andThen(function() {
-      var addedMessage = find('.message');
-      var messageText = find('.message .content').text().trim();
 
-      assert.equal(addedMessage.length, 1, 'Created a message and is now shown');
-      assert.equal(messageText, 'foo');
+    click('button');
+
+    andThen(function() {
+      var messages = find('.message');
+
+      assert.equal(messages.length, 1);
+
     });
   });
+
 });
 
-test('if sending a message fails then show error', function(assert) {
-  assert.expect(1);
-
-  server.create('channels', {
-    messages: []
-  });
-
-  server.post('messages', {error: 'failed'}, 500);
-
-  visit('/channels/1');
-
-  fillIn('.message-input', 'foo');
-  click('button');
-  andThen(function() {
-    var error = find('.create-error');
-    assert.equal(error.length, 1, 'Error is shown');
-  });
+test('shows error when failed to send message', function(assert) {
+  server.post('/message', {error: 'failed to send'}, 500);
 });

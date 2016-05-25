@@ -6,22 +6,19 @@ export default Ember.Route.extend({
   },
   actions: {
     sendMessage: function() {
-      var messageContent = this.get('controller.messageToAdd');
+      var messageToAdd = this.get('controller.messageToAdd');
       var message = this.store.createRecord('message', {
+        content: messageToAdd,
         user: 'seawatts',
-        content: messageContent,
         date: moment().format()
       });
 
-      var route = this;
-      message.save().then(function() {
-        route.set('controller.messageToAdd', '');
-        var channel = this.modelFor('channel');
-        channel.get('messages').pushObject(message);
-        channel.save();
-      }).catch(function() {
-        route.set('controller.errorMessage', 'Could not save message');
-      });
+      message.save();
+
+      var channel = this.modelFor('channel');
+
+      channel.get('messages').pushObject(message);
+      channel.save();
     }
   }
 });
