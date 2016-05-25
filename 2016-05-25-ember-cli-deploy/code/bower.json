@@ -1,5 +1,5 @@
 {
-  "name": "code",
+  "name": "ember-cli-deploy-test-app",
   "dependencies": {
     "ember": "~2.5.0",
     "ember-cli-shims": "0.1.1",
