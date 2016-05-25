@@ -1,6 +1,6 @@
 {
-  "name": "code",
-  "version": "0.0.0",
+  "name": "ember-cli-deploy-test-app",
+  "version": "0.1.0",
   "description": "Small description for code goes here",
   "private": true,
   "directories": {
@@ -12,9 +12,9 @@
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/seawatts/presentations",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 6.1.0"
   },
   "author": "",
   "license": "MIT",
