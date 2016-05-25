@@ -1,0 +1,30 @@
+machine:
+  environment:
+     GITHUB_COMMIT_SHA: ${CIRCLE_SHA1}
+     GITHUB_COMMIT_USER: ${CIRCLE_USERNAME}
+     GITHUB_ISSUE_NUMBER: ${CI_PULL_REQUEST}
+     GITHUB_REPO: ${CIRCLE_PROJECT_REPONAME}
+     GITHUB_REPO_NAME: presentations
+     GITHUB_USER_OR_ORGANIZATION: ${CIRCLE_PROJECT_USERNAME}
+     PUBLIC_URL: https://apps.intsm.net/{{versionSha}}
+     SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+     S3_BUCKET: apps.intsm.net
+     S3_REGION: us-west-2
+     S3_OVERWRITE_INDEX: true
+  node:
+    version: 6.1.0
+dependencies:
+  pre:
+    - npm set progress=false
+    - cd 2016-05-25-ember-cli-deploy/code && npm install
+    - cd 2016-05-25-ember-cli-deploy/code && npm install -g bower
+    - cd 2016-05-25-ember-cli-deploy/code && bower install
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - cd 2016-05-25-ember-cli-deploy/code && ember deploy staging --activate
+  feature:
+    branch: /(epic|feature|enhancement|bugfix|hotfix|release).*/
+    commands:
+      - cd 2016-05-25-ember-cli-deploy/code && ./node_modules/.bin/ember deploy pull-request
