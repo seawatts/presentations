@@ -3,8 +3,28 @@
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
-    // Add options here
+  let env = EmberApp.env();
+  let isProductionLikeBuild = false;
+  if (env === 'staging' || env === 'production') {
+    isProductionLikeBuild = true;
+  }
+
+  let fingerprint = {
+    enabled: isProductionLikeBuild,
+  };
+
+  let app = new EmberApp(defaults, {
+    dotEnv: {
+      clientAllowedKeys: [
+        'AWS_ACCESS_KEY',
+        'AWS_ACCESS_KEY_PROD',
+        'AWS_SECRET_ACCESS_KEY',
+        'AWS_SECRET_ACCESS_KEY_PROD',
+        'CIRCLE_CI_TOKEN',
+        'GITHUB_TOKEN',
+      ]
+    },
+    fingerprint,
   });
 
   // Use `app.import` to add additional libraries to the generated
