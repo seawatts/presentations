@@ -1,6 +1,6 @@
 {
-  "name": "code",
-  "version": "0.0.0",
+  "name": "ember-cli-deploy-test-app",
+  "version": "0.1.0",
   "description": "Small description for code goes here",
   "private": true,
   "directories": {
@@ -12,9 +12,9 @@
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "https://github.com/seawatts/presentations",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 6.1.0"
   },
   "author": "",
   "license": "MIT",
@@ -25,6 +25,8 @@
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-dependency-checker": "^1.2.0",
+    "ember-cli-deploy": "0.6.1",
+    "ember-cli-deploy-sm-pack": "0.7.5",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
@@ -37,6 +39,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
+    "ember-welcome-page": "1.0.3",
     "loader.js": "^4.0.1"
   }
 }
